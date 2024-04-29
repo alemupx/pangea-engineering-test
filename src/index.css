@@ -12,3 +12,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* Tailwind Config */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
