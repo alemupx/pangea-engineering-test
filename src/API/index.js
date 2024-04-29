@@ -59,7 +59,8 @@ class Client {
       HttpClient.get(API_ENDPOINTS.CREATOR_PAYOUT_READ, { sheetId: input }),
     data: () => HttpClient.get(API_ENDPOINTS.CREATOR_DATA_READ),
     fetchDetails: (creatorId) => {
-      const url = `${API_ENDPOINTS.CREATORS_SPEC}${creatorId}`;
+      /* const url = `${API_ENDPOINTS.CREATORS_SPEC}${creatorId}`; */
+      const url = 'https://blitz-backend-nine.vercel.app/api/creators/colewherld';
       console.log(`Fetching creator details from: ${url}`);
       return HttpClient.get(url);
     },

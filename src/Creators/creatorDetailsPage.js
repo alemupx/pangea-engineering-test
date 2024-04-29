@@ -52,12 +52,76 @@ const CreatorDetailsPage = () => {
     const fetchCreatorDetails = async () => {
       setLoading(true);
       try {
+        /* Data Object */      
+        response = {
+          avg_turnaround_time_days: "null",
+          avg_views: "null",
+          blitz_score: "null",
+          creator: "null",
+          date_added: "null",
+          dedicated: "null",
+          email: "null",
+          flag_notes: "null",
+          geolocation_gender_ethnicity: "null",
+          ig_feed_post: "null",
+          ig_reels_brand: "null",
+          ig_reels_sound: "null",
+          ig_stories_bundle: "null",
+          ig_story: "null",
+          instagram: "null",
+          instagram_link: "null",
+          integration_3045s: "null",
+          integration_3m: "null",
+          integration_60s: "null",
+          integration_90s: "null",
+          last_inbound: "null",
+          last_rate_presented: "null",
+          last_rate_taken: "null",
+          last_updated: "null",
+          manager: "null",
+          mediakit: "null",
+          notes_content_style: "null",
+          payout_email: "null",
+          pfphref: "null",
+          phone_number: "null",
+          primary_market: "null",
+          promos_completed: "null",
+          promos_pitched: "null",
+          promos_sent: "null",
+          rate_2530s: "null",
+          region: "null",
+          shorts: "null",
+          snap: "null",
+          snap_link: "null",
+          snapchat_story_post: "null",
+          status: "null",
+          superviser: "null",
+          tiktok: "null",
+          tiktok_brand: "null",
+          tiktok_link: "null",
+          tiktok_sound: "null",
+          total_inbound: "null",
+          total_paid_inbound: "null",
+          tweet: "null",
+          tweet_repost: "null",
+          twitch: "null",
+          twitch_link: "null",
+          twitter: "null",
+          twitter_link: "null",
+          youtube: "null",
+          youtube_link: "null",
+        };
         const response = await client.creators.fetchDetails(creatorId);
         console.log("Received response:", response);
         console.log(client);
 
         // Directly use the response assuming 'response' already contains the data object
         if (response && Object.keys(response).length > 0) {
+          
+          
+          
+          console.log(response);
+          
           setCreatorDetails(response); // Assuming 'response' is the data object you need
           console.log("Data set for creator:", response);
         } else {

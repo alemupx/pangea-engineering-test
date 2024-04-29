@@ -47,7 +47,7 @@ function App() {
           <Route path={routes.creatorMediaKit} element={<><PageTitle title="Creator Media Kit - Blitz" /><CreatorDetailsPage /></>} />
           <Route path={routes.roster} element={<AgencyCreatorRoster />} />  {/* New Route */}
 
-          <Route path="*" element={<><PageTitle title="404 Not Found - Blitz" /><Navigate to={routes.home} /></>} />
+          {/* <Route path="*" element={<><PageTitle title="404 Not Found - Blitz" /><Navigate to={routes.home} /></>} /> */}
         </Routes>
       </Router>
     </QueryClientProvider>

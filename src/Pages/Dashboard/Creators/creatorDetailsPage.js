@@ -48,11 +48,13 @@ const CreatorDetailsPage = () => {
   const [creatorDetails, setCreatorDetails] = useState(null);
   const [loading, setLoading] = useState(true); // Add loading state
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchCreatorDetails = async () => {
       setLoading(true);
       try {
         const response = await client.creators.fetchDetails(creatorId);
+
         console.log("Received response:", response);
         console.log(client);
 
@@ -82,6 +84,7 @@ const CreatorDetailsPage = () => {
   if (!creatorDetails) {
     return <Typography>No creator details found.</Typography>;
   }
+
   const highlightedCountries = ["USA", "UK", "Mexico", "Canada", "Colombia"]
     .map(mapCountryToIsoA3)
     .filter(Boolean);
@@ -92,29 +95,32 @@ const CreatorDetailsPage = () => {
     { name: "Instagram", value: parseInt(creatorDetails.instagram || 0, 10) },
     { name: "YouTube", value: parseInt(creatorDetails.youtube || 0, 10) },
   ];
-  const formatPromotionValue = value => {
-    const numericValue = parseFloat(value.replace('$', '').replace(',', '') || 0);
-    return numericValue > 999 ? numericValue.toLocaleString() : numericValue.toFixed(2);
+  const formatPromotionValue = (value) => {
+    const numericValue = parseFloat(
+      value.replace("$", "").replace(",", "") || 0
+    );
+    return numericValue > 999
+      ? numericValue.toLocaleString()
+      : numericValue.toFixed(2);
   };
   const promotionData = [
     {
       name: "TikTok Sound",
-      value: (creatorDetails.tiktok_sound || ''),
+      value: creatorDetails.tiktok_sound || "",
     },
     {
       name: "TikTok Brand",
-      value: (creatorDetails.tiktok_brand || ''),
+      value: creatorDetails.tiktok_brand || "",
     },
     {
       name: "Instagram Sound",
-      value: (creatorDetails.instagram_sound || ''),
+      value: creatorDetails.instagram_sound || "",
     },
     {
       name: "Instagram Brand",
-      value: (creatorDetails.instagram_brand || ''),
+      value: creatorDetails.instagram_brand || "",
     },
   ];
-  
 
   return (
     <>
@@ -137,26 +143,26 @@ const CreatorDetailsPage = () => {
         </Toolbar>
       </AppBar>
       <Box sx={{ flexGrow: 1, padding: 3, backgroundColor: "#f5f5f5" }}>
-  <Grid container spacing={2} justifyContent="center" alignItems="center">
-    <Grid item xs={12} sm={4}>
-      <Box
-        component="img"
-        src={creatorDetails.pfphref || profilePhoto}
-        alt="Profile"
-        sx={{
-          width: '100%',
-          maxWidth: 120,
-          height: 'auto',
-          borderRadius: "50%",
-        }}
-      />
-    </Grid>
-    <Grid item xs={12} sm={8}>
-      <Typography variant="h4" gutterBottom>
-        @{creatorDetails.creator}
-        </Typography>
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
+          <Grid item xs={12} sm={4}>
+            <Box
+              component="img"
+              src={creatorDetails.pfphref || profilePhoto}
+              alt="Profile"
+              sx={{
+                width: "100%",
+                maxWidth: 120,
+                height: "auto",
+                borderRadius: "50%",
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <Typography variant="h4" gutterBottom>
+              @{creatorDetails.creator}
+            </Typography>
+          </Grid>
         </Grid>
-  </Grid>
         <Paper sx={{ padding: 2, margin: "20px 0" }}>
           <Typography variant="body1">
             <strong>TikTok Profile:</strong>{" "}
@@ -190,7 +196,7 @@ const CreatorDetailsPage = () => {
           </Typography>
           {/* Followers Distribution */}
           <Grid item xs={12} md={6}>
-          <Typography variant="body1">
+            <Typography variant="body1">
               <strong>Presented By:</strong> {creatorDetails.manager}
             </Typography>
             <Typography variant="body1">
@@ -246,9 +252,7 @@ const CreatorDetailsPage = () => {
           <List>
             {promotionData.map((data) => (
               <ListItem key={data.name}>
-                <ListItemText
-                  primary={`${data.name}: $${(data.value)}`}
-                />
+                <ListItemText primary={`${data.name}: $${data.value}`} />
               </ListItem>
             ))}
           </List>
@@ -264,30 +268,35 @@ const CreatorDetailsPage = () => {
             <strong>Content Style:</strong> {creatorDetails.notes_content_style}
           </Typography>
           <ComposableMap>
-  <Geographies geography={geoUrl}>
-    {({ geographies }) =>
-      geographies.map((geo) => {
-        const isHighlighted = highlightedCountries.includes(geo.properties.ISO_A3);
-        return isHighlighted ? (
-          <Geography
-            key={geo.rsmKey}
-            geography={geo}
-            fill="#FF5533"
-          />
-        ) : null; // Don't render unhighlighted geographies to clean up the map
-      }).length > 0 ? geographies.map(geo => (
-        <Geography
-          key={geo.rsmKey}
-          geography={geo}
-          fill="#DDD"
-        />
-      )) : <Typography sx={{ textAlign: 'center' }}>Creator can't be mapped.</Typography>
-    }
-  </Geographies>
-</ComposableMap>
-
+            <Geographies geography={geoUrl}>
+              {({ geographies }) =>
+                geographies.map((geo) => {
+                  const isHighlighted = highlightedCountries.includes(
+                    geo.properties.ISO_A3
+                  );
+                  return isHighlighted ? (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      fill="#FF5533"
+                    />
+                  ) : null; // Don't render unhighlighted geographies to clean up the map
+                }).length > 0 ? (
+                  geographies.map((geo) => (
+                    <Geography key={geo.rsmKey} geography={geo} fill="#DDD" />
+                  ))
+                ) : (
+                  <Typography sx={{ textAlign: "center" }}>
+                    Creator can't be mapped.
+                  </Typography>
+                )
+              }
+            </Geographies>
+          </ComposableMap>
         </Paper>
       </Box>
+
+      
     </>
   );
 };
