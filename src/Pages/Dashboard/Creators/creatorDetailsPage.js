@@ -103,24 +103,35 @@ const CreatorDetailsPage = () => {
       ? numericValue.toLocaleString()
       : numericValue.toFixed(2);
   };
+
+  const parseValue = (value) => {
+    let result = parseFloat(value);    
+    return result;
+  };
   const promotionData = [
     {
       name: "TikTok Sound",
-      value: creatorDetails.tiktok_sound || "",
+      value: parseValue(creatorDetails.tiktok_brand) || "",
     },
     {
       name: "TikTok Brand",
-      value: creatorDetails.tiktok_brand || "",
+      value: parseValue(creatorDetails.tiktok_sound)|| "",
     },
     {
       name: "Instagram Sound",
-      value: creatorDetails.instagram_sound || "",
-    },
+      value: creatorDetails.instagram_sound|| "0",
+    },  
     {
       name: "Instagram Brand",
-      value: creatorDetails.instagram_brand || "",
+      value: creatorDetails.instagram_brand|| "0",
     },
   ];
+
+  const getTotalFollowers = (a, b, c) => {
+    return a + b + c;
+  };
+  
+  
 
   return (
     <>
@@ -143,93 +154,152 @@ const CreatorDetailsPage = () => {
         </Toolbar>
       </AppBar>
 
-      <div className="flex flex-col items-center pt-1em ">
-        <Box
-          component="img"
-          src={creatorDetails.pfphref || profilePhoto}
-          alt="Profile"
-          sx={{
-            width: "100%",
-            maxWidth: 120,
-            height: "auto",
-            borderRadius: "50%",
-          }}
-        />
-        <h1 className="text-3xl font-bold underline">
-          @{creatorDetails.creator}
-        </h1>
-      </div>
-      <section class="text-gray-600 body-font overflow-hidden">
-        <div class="container px-5 py-24 mx-auto">
-          <div class="lg:w-4/5 mx-auto flex flex-wrap">
-            <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-              <h2 class="text-sm title-font text-gray-500 tracking-widest">
-                BRAND NAME
-              </h2>
-              <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">
-                Animated Night Hill Illustrations
-              </h1>
-              <div class="flex mb-4">
-                <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
-                  Description
-                </a>
-                <a class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
-                  Reviews
-                </a>
-                <a class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
-                  Details
-                </a>
-              </div>
-              <p class="leading-relaxed mb-4">
-                Fam locavore kickstarter distillery. Mixtape chillwave tumeric
-                sriracha taximy chia microdosing tilde DIY. XOXO fam inxigo
-                juiceramps cornhole raw denim forage brooklyn. Everyday carry +1
-                seitan poutine tumeric. Gastropub blue bottle austin listicle
-                pour-over, neutra jean.
-              </p>
-              <div class="flex border-t border-gray-200 py-2">
-                <span class="text-gray-500">Color</span>
-                <span class="ml-auto text-gray-900">Blue</span>
-              </div>
-              <div class="flex border-t border-gray-200 py-2">
-                <span class="text-gray-500">Size</span>
-                <span class="ml-auto text-gray-900">Medium</span>
-              </div>
-              <div class="flex border-t border-b mb-6 border-gray-200 py-2">
-                <span class="text-gray-500">Quantity</span>
-                <span class="ml-auto text-gray-900">4</span>
-              </div>
-              <div class="flex">
-                <span class="title-font font-medium text-2xl text-gray-900">
-                  $58.00
-                </span>
-                <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                  Button
-                </button>
-                <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                  <svg
-                    fill="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    class="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <Box
-              component="img"
+      <div class="grid sm:grid-cols-1 lg:grid-cols-2">
+        {/* Main Details */}
+
+        <div class="col-span-1">
+          <div className="flex flex-col items-center pt-8 ">
+            <img
               src={creatorDetails.pfphref || profilePhoto}
-              alt="Profile"
-              class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-            />
-            {/* <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400"> */}
+              className="w-full max-w-72 rounded-full"
+            ></img>
+
+            <span className="text-5xl font-bold p-8">
+              @{creatorDetails.creator}
+            </span>
+
+            <div className="flex flex-col text-center">
+              <span className="text-2xl font-bold">
+                Geolocation, Gender, Ethnicity:
+              </span>
+              <span className="text-1xl font-medium">
+                {creatorDetails.geolocation_gender_ethnicity}
+              </span>
+            </div>
+
+            <div className="flex flex-col text-center">
+              <span className="text-2xl font-bold pt-8">Content Style:</span>
+              <span className="text-1xl font-medium">
+                {creatorDetails.notes_content_style}
+              </span>
+            </div>
+
+            <div className="pt-8 pb-8">
+              <span className="text-4xl font-bold p-8">Total Followers:</span>
+              <span className="text-4xl font-light ">
+                {getTotalFollowers(
+                  creatorDetails.instagram,
+                  creatorDetails.tiktok,
+                  creatorDetails.youtube
+                )}
+              </span>
+            </div>
           </div>
         </div>
-      </section>
+
+        {/* Social Networks */}
+
+        <div class="col-span-1">
+          <div className="flex gap-4 pt-8 md:flex-col lg:flex-row justify-evenly">
+            {/* IG */}
+            <div className="flex">
+              <a
+                className="cursor-pointer"
+                href={creatorDetails.instagram_link}
+              >
+                <svg
+                  className="w-20 h-20 bg-red-500"
+                  viewBox="0 0 200 200"
+                  fill="white"
+                >
+                  <path d="M65 16.6667H135C161.667 16.6667 183.333 38.3334 183.333 65.0001V135C183.333 147.819 178.241 160.113 169.177 169.177C160.113 178.241 147.819 183.333 135 183.333H65C38.3333 183.333 16.6667 161.667 16.6667 135V65.0001C16.6667 52.1813 21.7589 39.8875 30.8232 30.8233C39.8874 21.759 52.1812 16.6667 65 16.6667ZM63.3333 33.3334C55.3768 33.3334 47.7462 36.4941 42.1201 42.1202C36.494 47.7463 33.3333 55.3769 33.3333 63.3334V136.667C33.3333 153.25 46.75 166.667 63.3333 166.667H136.667C144.623 166.667 152.254 163.506 157.88 157.88C163.506 152.254 166.667 144.623 166.667 136.667V63.3334C166.667 46.7501 153.25 33.3334 136.667 33.3334H63.3333ZM143.75 45.8334C146.513 45.8334 149.162 46.9309 151.116 48.8844C153.069 50.8379 154.167 53.4874 154.167 56.2501C154.167 59.0128 153.069 61.6623 151.116 63.6158C149.162 65.5693 146.513 66.6668 143.75 66.6668C140.987 66.6668 138.338 65.5693 136.384 63.6158C134.431 61.6623 133.333 59.0128 133.333 56.2501C133.333 53.4874 134.431 50.8379 136.384 48.8844C138.338 46.9309 140.987 45.8334 143.75 45.8334ZM100 58.3334C111.051 58.3334 121.649 62.7233 129.463 70.5373C137.277 78.3513 141.667 88.9494 141.667 100C141.667 111.051 137.277 121.649 129.463 129.463C121.649 137.277 111.051 141.667 100 141.667C88.9493 141.667 78.3512 137.277 70.5372 129.463C62.7232 121.649 58.3333 111.051 58.3333 100C58.3333 88.9494 62.7232 78.3513 70.5372 70.5373C78.3512 62.7233 88.9493 58.3334 100 58.3334ZM100 75.0001C93.3696 75.0001 87.0107 77.634 82.3223 82.3224C77.6339 87.0108 75 93.3697 75 100C75 106.631 77.6339 112.989 82.3223 117.678C87.0107 122.366 93.3696 125 100 125C106.63 125 112.989 122.366 117.678 117.678C122.366 112.989 125 106.631 125 100C125 93.3697 122.366 87.0108 117.678 82.3224C112.989 77.634 106.63 75.0001 100 75.0001Z"></path>
+                </svg>
+              </a>
+
+              <span className="flex items-center text-4xl font-bold pl-2 ">
+                {creatorDetails.instagram}
+              </span>
+            </div>
+
+            {/* TT */}
+            <div className="flex">
+              <a className="cursor-pointer" href={creatorDetails.tiktok_link}>
+                <svg
+                  className="w-20 h-20 bg-black"
+                  viewBox="0 0 200 200"
+                  fill="white"
+                >
+                  <path d="M107.867 13.4255V131.484C107.867 144.526 97.2917 155.092 84.2583 155.092C71.2167 155.092 60.65 144.517 60.65 131.484C60.65 118.442 71.225 107.876 84.2583 107.876V76.3922C53.8333 76.3922 29.1667 101.059 29.1667 131.484C29.1667 161.909 53.8333 186.576 84.2583 186.576C114.683 186.576 139.35 161.909 139.35 131.484V76.3922L141.008 77.2255C150.267 81.8589 160.475 84.2672 170.825 84.2672V52.7755L169.883 52.5422C151.933 48.0589 139.342 31.9255 139.342 13.4255H107.867Z"></path>
+                </svg>
+              </a>
+              <span className="flex items-center text-4xl font-bold pl-2">
+                {creatorDetails.tiktok}
+              </span>
+            </div>
+
+            {/* YT */}
+            <div className="flex">
+              <a className="cursor-pointer" href={creatorDetails.youtube_link}>
+                <svg
+                  className="w-20 h-20 bg-red-600"
+                  viewBox="0 0 200 200"
+                  fill="white"
+                >
+                  <path d="M83.3333 125L126.583 100L83.3333 75.0001V125ZM179.667 59.7501C180.75 63.6667 181.5 68.9167 182 75.5834C182.583 82.2501 182.833 88.0001 182.833 93.0001L183.333 100C183.333 118.25 182 131.667 179.667 140.25C177.583 147.75 172.75 152.583 165.25 154.667C161.333 155.75 154.167 156.5 143.167 157C132.333 157.583 122.417 157.833 113.25 157.833L100 158.333C65.0833 158.333 43.3333 157 34.75 154.667C27.25 152.583 22.4166 147.75 20.3333 140.25C19.25 136.333 18.5 131.083 18 124.417C17.4166 117.75 17.1666 112 17.1666 107L16.6666 100C16.6666 81.7501 18 68.3334 20.3333 59.7501C22.4166 52.2501 27.25 47.4167 34.75 45.3334C38.6666 44.2501 45.8333 43.5001 56.8333 43.0001C67.6666 42.4167 77.5833 42.1667 86.75 42.1667L100 41.6667C134.917 41.6667 156.667 43.0001 165.25 45.3334C172.75 47.4167 177.583 52.2501 179.667 59.7501Z"></path>
+                </svg>
+              </a>
+              <span className="flex items-center text-4xl font-bold pl-2">
+                {creatorDetails.youtube}
+              </span>
+            </div>
+          </div>
+
+          <div class="pt-12">
+
+          <div className="flex flex-col text-center">
+              <span className="text-2xl font-bold">Followers Distribution</span>
+            </div>
+            
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={followersData}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={100}
+                  label
+                >
+                  {followersData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={["#0088FE", "#00C49F", "#FFBB28"][index]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div class="pt-18">
+            <div className="flex flex-col text-center">
+              <span className="text-2xl font-bold">Promotion Rates ($)</span>
+            </div>
+
+            <ResponsiveContainer width="100%" height={200}>
+              <BarChart data={promotionData}>
+                <XAxis dataKey="name" />
+                <YAxis dataKey="value"/>
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="value" fill="#8884d8" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
 
       <Box sx={{ flexGrow: 1, padding: 3, backgroundColor: "#f5f5f5" }}>
         <Grid container spacing={2} justifyContent="center" alignItems="center">
@@ -252,6 +322,7 @@ const CreatorDetailsPage = () => {
             </Typography>
           </Grid>
         </Grid>
+
         <Paper sx={{ padding: 2, margin: "20px 0" }}>
           <Typography variant="body1">
             <strong>TikTok Profile:</strong>{" "}
@@ -332,7 +403,7 @@ const CreatorDetailsPage = () => {
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={promotionData}>
               <XAxis dataKey="name" />
-              <YAxis />
+              <YAxis dataKey="value" />
               <Tooltip />
               <Legend />
               <Bar dataKey="value" fill="#8884d8" />
