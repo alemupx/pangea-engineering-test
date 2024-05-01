@@ -184,10 +184,10 @@ const CreatorDetailsPage = () => {
           {/* Navigation items here, if any */}
         </Toolbar>
       </AppBar>
-      
-      <div class="grid sm:grid-cols-1 lg:grid-cols-2 m-4">
+
+      <div class="grid m-4 sm:grid-cols-1 lg:grid-cols-2 ">
         {/* Main Details */}
-        <div class="col-span-1 bg-black text-white">
+        <div class="col-span-1 bg-black text-white rounded-3xl shadow-2xl">
           <div className=" flex flex-col items-center pt-8 ">
             <img
               src={creatorDetails.pfphref || profilePhoto}
@@ -228,23 +228,25 @@ const CreatorDetailsPage = () => {
 
               {creatorDetails.tiktok != null && (
                 <a
-                className="flex cursor-pointer hover:animate-pulse"
-                target="_blank"
-                href={creatorDetails.tiktok_link}
-              >
-                <div>
-                  <svg className="w-10 h-10" viewBox="0 0 200 200" fill="white">
-                    <path d="M107.867 13.4255V131.484C107.867 144.526 97.2917 155.092 84.2583 155.092C71.2167 155.092 60.65 144.517 60.65 131.484C60.65 118.442 71.225 107.876 84.2583 107.876V76.3922C53.8333 76.3922 29.1667 101.059 29.1667 131.484C29.1667 161.909 53.8333 186.576 84.2583 186.576C114.683 186.576 139.35 161.909 139.35 131.484V76.3922L141.008 77.2255C150.267 81.8589 160.475 84.2672 170.825 84.2672V52.7755L169.883 52.5422C151.933 48.0589 139.342 31.9255 139.342 13.4255H107.867Z"></path>
-                  </svg>
-                </div>
+                  className="flex cursor-pointer hover:animate-pulse"
+                  target="_blank"
+                  href={creatorDetails.tiktok_link}
+                >
+                  <div>
+                    <svg
+                      className="w-10 h-10"
+                      viewBox="0 0 200 200"
+                      fill="white"
+                    >
+                      <path d="M107.867 13.4255V131.484C107.867 144.526 97.2917 155.092 84.2583 155.092C71.2167 155.092 60.65 144.517 60.65 131.484C60.65 118.442 71.225 107.876 84.2583 107.876V76.3922C53.8333 76.3922 29.1667 101.059 29.1667 131.484C29.1667 161.909 53.8333 186.576 84.2583 186.576C114.683 186.576 139.35 161.909 139.35 131.484V76.3922L141.008 77.2255C150.267 81.8589 160.475 84.2672 170.825 84.2672V52.7755L169.883 52.5422C151.933 48.0589 139.342 31.9255 139.342 13.4255H107.867Z"></path>
+                    </svg>
+                  </div>
 
-                <span className="flex items-center text-43xl font-light pl-2 select-none ">
-                  {creatorDetails.tiktok}
-                </span>
-              </a>
+                  <span className="flex items-center text-43xl font-light pl-2 select-none ">
+                    {creatorDetails.tiktok}
+                  </span>
+                </a>
               )}
-              
-              
 
               {/* YT */}
 
