@@ -60,7 +60,7 @@ class Client {
     data: () => HttpClient.get(API_ENDPOINTS.CREATOR_DATA_READ),
     fetchDetails: (creatorId) => {
       /* const url = `${API_ENDPOINTS.CREATORS_SPEC}${creatorId}`; */
-      const url = 'https://blitz-backend-nine.vercel.app/api/creators/ashleykeno17';
+      const url = 'https://blitz-backend-nine.vercel.app/api/creators/zusjeofficial';
       console.log(`Fetching creator details from: ${url}`);
       return HttpClient.get(url);
     },
